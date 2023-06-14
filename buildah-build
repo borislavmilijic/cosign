@@ -1,0 +1,10 @@
+#!/bin/bash
+ctr1=$(buildah from almalinux)
+buildah run "$ctr1" -- rpm -i https://github.com/sigstore/cosign/releases/download/v2.0.2/cosign-2.0.2.x86_64.rpm
+buildah copy "$ctr1" ./entrypoint.sh /bin/entrypoint.sh
+buildah run "$ctr1" chmod 777 /bin/entrypoint.sh
+buildah run "$ctr1" useradd cosign -m -s /bin/bash
+buildah config --entrypoint '["/bin/entrypoint.sh"]' "$ctr1"
+buildah config --user cosign "$ctr1"
+buildah commit $ctr1 auroranexus.smartstream-stp.com:5000/cosign
+buildah rm $ctr1
