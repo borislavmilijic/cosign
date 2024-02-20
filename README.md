@@ -45,5 +45,7 @@ podman run --rm -ti \
  -e OCI_REGISTRY=${OCI_REGISTRY}\
  -e OCI_PASS=${OCI_PASS}\
  -e OCI_LOGIN=${OCI_LOGIN}\
- auroranexus.smartstream-stp.com:5000/cosign cosign sing --key ~/cosign.pub auroranexus.smartstream-stp.com:5000/aurora-messaging-service/camt-camel:8.6.5-R5
+ auroranexus.smartstream-stp.com:5000/cosign cosign sign --key ~/cosign.pub auroranexus.smartstream-stp.com:5000/aurora-messaging-service/camt-camel:8.6.5-R5
 ```
+Example:
+![Alt Text](./cosign.gif)
